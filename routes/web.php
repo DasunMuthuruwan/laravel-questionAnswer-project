@@ -1,5 +1,6 @@
 <?php
 
+// use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 // use Admin\UserController;
 /*
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('/users', UserController::class);
-});
+// Route::middleware(['auth'])->group(function () {
+
+// });
+Route::resource('/', UserController::class);
+Route::resource('/questions',QuestionController::class);
