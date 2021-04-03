@@ -64,4 +64,8 @@ class User extends Authenticatable implements JWTSubject
     public function questions(){
         return $this->hasMany(Question::class);
     }
+
+    public function getUrlAttribute(){
+        return '#';
+    }
 }

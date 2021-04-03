@@ -1,18 +1,22 @@
 @extends('templates.main')
 @include('user.index')
 @section('content')
-<div class="row justify-content-center">
-    <div class="card shadow col-md-10 offset-md-1">
-        <div class="card-header">
-            <h4 class="text-dark text-center">All Questions<h4>
+<div class="col-md-12 justify-content-center">
+    <div class="card border border-success">
+        <div class="p-2 bg-info text-white">
+            <h4 class="text-dark text-center">All Questions</h4>
         </div>
         <div class="card-body">
             @foreach ($questions as $question)
                 <div class="media mt-3">
                     <div class="media-body">
-                        <div class="card">
+                        <div class="card border border-warning">
                             <div class="card-body">
-                                <h6 class="text-info mt-0">{{ $question->title }}</h6>
+                                <h5 class="text-info mt-0"><a href="{{ $question->url }}">{{ $question->new_title }}</a></h5>
+                                <p class="lead">
+                                    Asked By <a href="{{ $question->user->url }}" class="text-success"> {{$question->user->name}}</a>
+                                    <small class="text-muted" style="font-size: 16px;"> {{ $question->created_date }} </small>
+                                </p>
                                 {{ Str::limit($question->body, 250) }}
                             </div>
                         </div>
