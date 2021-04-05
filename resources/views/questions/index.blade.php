@@ -3,10 +3,14 @@
 @section('content')
 <div class="col-md-12 justify-content-center">
     <div class="card border border-success mb-4">
-        <div class="p-2 bg-info text-white">
-            <h4 class="text-dark text-center">All Questions</h4>
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <h4 class="text-info">All Questions</h4>
+                <a href="{{ route('questions.create') }}" class="btn btn-danger">Create Question</a>
+            </div>
         </div>
         <div class="card-body">
+            @include('partials.alert')
             @foreach ($questions as $question)
                 <div class="card border border-warning">
                     <div class="card-body">
@@ -31,7 +35,7 @@
                 </div>
                 <hr>
             @endforeach
-            <div class="text-center mt-4">
+            <div class="justify-content-center mt-4">
                 {{$questions->links()}}
             </div>
         </div>
