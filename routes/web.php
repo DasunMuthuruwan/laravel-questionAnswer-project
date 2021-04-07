@@ -1,6 +1,7 @@
 <?php
 
-// use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 // use Admin\UserController;
 /*
@@ -22,4 +23,5 @@ use Illuminate\Support\Facades\Route;
 
 // });
 Route::resource('/', UserController::class);
-Route::resource('/questions',QuestionController::class);
+Route::resource('/questions',QuestionController::class)->except('show');
+Route::get('/questions/{slug}',[QuestionController::class,'show'])->name('questions.show');

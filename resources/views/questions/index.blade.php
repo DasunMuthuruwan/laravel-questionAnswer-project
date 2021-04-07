@@ -3,18 +3,32 @@
 @section('content')
 <div class="col-md-12 justify-content-center">
     <div class="card border border-success mb-4">
-        <div class="card-header">
+        <div class="card-header bg-danger">
             <div class="d-flex justify-content-between">
-                <h4 class="text-info">All Questions</h4>
-                <a href="{{ route('questions.create') }}" class="btn btn-danger">Create Question</a>
+                <h4 class="text-dark">All Questions</h4>
+                <a href="{{ route('questions.create') }}" class="btn btn-outline-warning">Create Question</a>
             </div>
         </div>
         <div class="card-body">
             @include('partials.alert')
             @foreach ($questions as $question)
-                <div class="card border border-warning">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="text-info mt-0"><a href="{{ $question->url }}">{{ $question->new_title }}</a></h5>
+                        <div class="d-flex justify-content-end">
+                            <h5 class="mt-0"><a href="{{ $question->url }}">{{ $question->new_title }}</a></h5>
+                            <div class="mx-auto" >
+                                @can('update-question',$question)
+                                    <a href="{{ route('questions.edit',$question) }}" class="btn btn-outline-danger btn-sm">Edit</a>
+                                @endcan
+                                @can('delete-question',$question)
+                                    <form action="{{ route('questions.destroy',$question) }}" method="post" class="form-delete">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-info btn-sm">Delete</button>
+                                    </form>
+                                @endcan
+                            </div>
+                        </div>
                             <p class="lead">
                                 Asked By <a href="{{ $question->user->url }}" class="text-success"> {{$question->user->name}}</a>
                                 <small class="text-muted" style="font-size: 16px;"> {{ $question->created_date }} </small>

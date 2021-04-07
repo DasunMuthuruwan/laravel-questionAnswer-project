@@ -7,7 +7,7 @@
 }
 
 .counters .status{
- 
+
     &.unanswered{
         border: none;
     }
@@ -22,3 +22,8 @@
         color: #fff;
     }
 }
+
+form.form-delete{
+    display: inline;
+}
+
