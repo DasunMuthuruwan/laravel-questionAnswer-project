@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Gate;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['index','show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +60,9 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         $question->increment('views');
+
+        // $question->views = $question->views + 1;
+        // $question->save();
 
         return view('questions.show',compact('question'));
     }
