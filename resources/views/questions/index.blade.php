@@ -15,21 +15,23 @@
                 @foreach ($questions as $question)
                     <div class="card">
                         <div class="card-body">
-                            <div class="d-flex justify-content-end">
-                                <h5 class="mt-0"><a href="{{ $question->url }}">{{ $question->new_title }}</a></h5>
-                                <div class="mx-auto" >
-                                    @can('update-question',$question)
-                                        <a href="{{ route('questions.edit',$question) }}" class="btn btn-outline-danger btn-sm">Edit</a>
-                                    @endcan
-                                    @can('delete-question',$question)
-                                        <form action="{{ route('questions.destroy',$question) }}" method="post" class="form-delete">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-outline-info btn-sm">Delete</button>
-                                        </form>
-                                    @endcan
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5 class="mt-0"><a href="{{ $question->url }}">{{ $question->new_title }}</a></h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                            @can('update-question',$question)
+                                                <a href="{{ route('questions.edit',$question->id) }}" class="btn btn-outline-danger btn-sm">Edit</a>
+                                            @endcan
+                                            @can('delete-question',$question)
+                                                <form action="{{ route('questions.destroy',$question->id) }}" method="post" class="form-delete">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-info btn-sm">Delete</button>
+                                                </form>
+                                            @endcan
+                                    </div>
                                 </div>
-                            </div>
                                 <p class="lead">
                                     Asked By <a href="{{ $question->user->url }}" class="text-success"> {{$question->user->name}}</a>
                                     <small class="text-muted" style="font-size: 16px;"> {{ $question->created_date }} </small>

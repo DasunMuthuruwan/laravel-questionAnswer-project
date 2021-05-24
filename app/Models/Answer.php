@@ -10,7 +10,7 @@ use App\Models\User;
 class Answer extends Model
 {
     use HasFactory;
-    protected $fillable = ['body'];
+    protected $fillable = ['user_id','body'];
 
     public function question(){
         return $this->belongsTo(Question::class);
@@ -27,11 +27,15 @@ class Answer extends Model
         static::created(function($answer){
             $answer->question->increment('answers_count');
         });
+
+        static::deleted(function($answer){
+            $answer->question->decrement('answers_count');
+        });
     }
 
     public function getCreatedDateAttribute(){
 
         return $this->created_at->diffForHumans();
-        
+
     }
 }
