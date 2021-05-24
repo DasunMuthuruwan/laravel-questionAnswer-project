@@ -3,8 +3,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-12 justify-content-center">
-        <div class="card border border-success mb-4">
-            <div class="card-header bg-danger">
+        <div class="card shadow mt-4 mb-4">
+            <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h4 class="text-dark">All Questions</h4>
                     <a href="{{ route('questions.create') }}" class="btn btn-outline-warning">Create Question</a>
