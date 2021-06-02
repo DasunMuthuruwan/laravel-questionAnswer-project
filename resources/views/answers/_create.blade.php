@@ -8,8 +8,8 @@
                 <form action="{{ route('questions.answers.store',$question->id) }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="answer_body">Answer Body</label>
-                        <textarea rows="5" cols="6" name="body" class="form-control mt-4 {{ $errors->has('body') ? 'is-invalid':'' }}" mt-4"></textarea>
+                        <label for="answer_body" class="text-danger"><b>Answer Body</b></label>
+                        <textarea rows="10" cols="30" name="body" class="form-control mt-4 {{ $errors->has('body') ? 'is-invalid':'' }}" mt-4"></textarea>
                         @if($errors->has('body'))
                             <span class="invalid-feedback">
                                 <strong>{{ $errors->first('body') }}</strong>

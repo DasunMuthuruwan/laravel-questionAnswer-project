@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Question;
 use App\Models\User;
+use App\VotableTrait;
 
 class Answer extends Model
 {
-    use HasFactory;
+    use HasFactory, VotableTrait;
     protected $fillable = ['user_id','body'];
 
     public function question(){

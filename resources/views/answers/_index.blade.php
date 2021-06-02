@@ -9,34 +9,10 @@
                 @if(count($answers)>0)
                     @foreach ($answers as $answer)
                     <div class="d-flex flex-row vote-controls">
-                        <span class="d-sm-block">
-                            <a title="This answer is useful" class="vote-up"><i class="fas fa-caret-up fa-3x"></i></a>
-                            <span class="votes-count">123</span>
-                            <a title="This answer is not useful" class="vote-down off"><i class="fas fa-caret-down fa-3x"></i></a>
-                        @can('accept', $answer)
-                            <a title="Click to mark as favorite answer"
-                                class="{{ $answer->status }}"
-                                onclick="event.preventDefault(); document.getElementById('answer-accept-{{ $answer->id }}').submit();">
-                                <i class="fas fa-check fa-2x"></i>
-                            </a>
-                            <form
-                                id="answer-accept-{{ $answer->id }}"
-                                action="{{ route('answers.accept',$answer->id) }}"
-                                style="display: none;"
-                                method="post">
-                                @csrf
-                            </form>
-                        @else
-                            @if ($answer->is_best)
-                                <a
-                                    title="The question owner accepted this answer as best answer"
-                                    class="{{ $answer->status }}">
-                                    <i class="fas fa-check fa-2x"></i>
-                                </a>
-                            @endif
-                        @endcan
-                        </span>
-                        <p class="text-muted ml-4">{{ $answer->body }}</p>
+                        @include('shared._vote',[
+                            'model' => $answer
+                        ])
+                        <p class="text-danger ml-4">{{ $answer->body }}</p>
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-4">
@@ -53,13 +29,10 @@
                         </div>
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
-                            <span class="text-muted">Answered {{ $answer->created_date }}</span>
-                            <div class="media mt-2">
-                                <a href="{{ $answer->user->url }}" class="ml-2">
-                                    <img src="{{ $answer->user->avatar }}" alt="" class="mx-auto">
-                                </a>
-                                <a href="{{ $answer->user->url }}"> <small>{{$answer->user->name}}</small></a>
-                            </div>
+                            @include('shared._author',[
+                                'model' => $answer,
+                                'label' => 'Answered'
+                            ])
                         </div>
                     </div>
                     <hr>

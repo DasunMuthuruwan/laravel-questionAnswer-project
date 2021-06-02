@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Answer;
+use App\VotableTrait;
+Use Illuminate\Support\Facades\Auth;
 
 class Question extends Model
 {
-    use HasFactory;
+    use HasFactory,VotableTrait;
 
     protected $fillable = [
         'title',
@@ -55,6 +57,22 @@ class Question extends Model
     public function acceptBestAnswer(Answer $answer){
         $this->best_answer_id = $answer->id;
         $this->save();
+    }
+
+    public function favorites(){
+        return $this->belongsToMany(User::class,'favorites')->withTimestamps();
+    }
+
+    public function isFavorited(){
+        return $this->favorites()->where('user_id',auth()->id())->count() > 0;
+    }
+
+    public function getIsFavoritedAttribute(){
+        return $this->isFavorited();
+    }
+
+    public function getFavoritesCountAttribute(){
+        return $this->favorites->count();
     }
 
     // public function getBodyHtmlAttribute(){

@@ -1,8 +1,8 @@
 @extends('templates.main')
 @include('user.index')
 @section('content')
-<div class="col-md-8 offset-md-1 justify-content-center">
-    <div class="card border border-success mb-4">
+<div class="col-md-8 offset-md-2 justify-content-center">
+    <div class="card shadow mt-4 mb-4">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h4 class="text-info">Edit Question</h4>

@@ -12,25 +12,19 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-row vote-controls">
-                        <span class="d-sm-block">
-                            <a title="This question is useful" class="vote-up"><i class="fas fa-caret-up fa-3x"></i></a>
-                            <span class="votes-count">123</span>
-                            <a title="This question is not useful" class="vote-down off"><i class="fas fa-caret-down fa-3x"></i></a>
-                            <a title="Click to mark as favorite question" class="favorite"><i class="fas fa-star fa-2x"></i></a>
-                            <span class="favorite-count mt-2">123</span>
-                        </span>
+                        @include('shared._vote',[
+                            'model' => $question
+                        ])
                         <p class="text-muted ml-4">{{$question->body}}</p>
                     </div>
-                    <hr>
-                    <div class="text-center">
-                        <span class="text-muted">Question {{ $question->created_date }}</span>
-                        <div class="media mt-2">
-                            <a href="{{ $question->user->url }}" class="pr-2">
-                                <img src="{{ $question->user->avatar }}">
-                            </a>
-                            <div class="media-body">
-                            <a href="{{ $question->user->url }}"> <small>{{$question->user->name}}</small></a>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            @include('shared._author',[
+                                'model'=>$question,
+                                'label'=>'Asked'
+                            ])
                         </div>
                     </div>
                 </div>

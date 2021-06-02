@@ -1,8 +1,8 @@
 @extends('templates.main')
 @include('user.index')
 @section('content')
-<div class="col-md-8 offset-md-1 justify-content-center">
-    <div class="card border border-success mb-4">
+<div class="col-md-8 offset-md-2 justify-content-center">
+    <div class="card shadow mt-4 mb-4">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h4 class="text-info">Ask Question</h4>
@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <form action="{{ route('questions.store') }}" method="post">
-                @include('questions.form',['buttonTitle' => 'Ask Question'])
+                @include('questions.form',['buttonTitle' => 'Submit Question'])
             </form>
         </div>
     </div>
